@@ -1,0 +1,82 @@
+﻿<ContentDialog
+    x:Class="Imdb.Resources.DetailedMovieView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Imdb.Resources"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:converters="using:Imdb.Converters"
+    xmlns:controls="using:Microsoft.UI.Xaml.Controls"
+    xmlns:lottie="using:Microsoft.Toolkit.Uwp.UI.Lottie"
+    mc:Ignorable="d"
+    Title="{x:Bind modalViewModel.DetailedMedia.Title, Mode=OneWay}"
+    CloseButtonText="Close">
+    <ContentDialog.Resources>
+        <converters:StringToUriConverter x:Key="StringToUri"/>
+        <converters:StringFormatConverter x:Key="StringFormat"/>
+        <Style TargetType="TextBlock">
+            <Setter Property="FontSize" Value="16"/>
+        </Style>
+    </ContentDialog.Resources>
+
+    <Grid Width="500"
+          Height="500"
+          DataContext="{x:Bind modalViewModel.DetailedMedia, Mode=OneWay}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Border Visibility="{x:Bind modalViewModel.IsLoading, Mode=OneWay}"
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
+                Width="200"
+                Height="200"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center"
+                Margin="40">
+            <controls:AnimatedVisualPlayer>
+                <lottie:LottieVisualSource UriSource="ms-appx:///Assets//1961-movie-loading.json"/>
+            </controls:AnimatedVisualPlayer>
+        </Border>
+        <Image Source="{Binding Poster, Converter={StaticResource StringToUri}}"
+               Width="250"
+               Grid.Column="0"/>
+        <StackPanel Grid.Column="1"
+                    Margin="10"
+                    VerticalAlignment="Center">
+            <StackPanel.Resources>
+                <Style TargetType="TextBlock">
+                    <Setter Property="Margin" Value="0 5"/>
+                </Style>
+            </StackPanel.Resources>
+            <TextBlock Text="{Binding Year,
+                       Converter={StaticResource StringFormat}, 
+                       ConverterParameter='Year: {0}'}"/>
+            <TextBlock Text="{Binding ImdbRating,
+                       Converter={StaticResource StringFormat}, 
+                       ConverterParameter='Rating: {0}'}"/>
+            <TextBlock Text="{Binding Runtime,
+                       Converter={StaticResource StringFormat}, 
+                       ConverterParameter='Runtime: {0}'}"/>
+            <TextBlock Text="{Binding Director,
+                       Converter={StaticResource StringFormat}, 
+                       ConverterParameter='Director: {0}'}"/>
+            <TextBlock Text="{Binding Writer,
+                       Converter={StaticResource StringFormat}, 
+                       ConverterParameter='Writer: {0}'}"
+                       TextWrapping="WrapWholeWords"/>
+            <TextBlock Text="{Binding Actors,
+                       Converter={StaticResource StringFormat}, 
+                       ConverterParameter='Actors: {0}'}"
+                       TextWrapping="WrapWholeWords"/>
+            <TextBlock Text="{Binding Genre,
+                       Converter={StaticResource StringFormat}, 
+                       ConverterParameter='Genre: {0}'}"
+                       TextWrapping="WrapWholeWords"/>
+            <TextBlock Text="{Binding Awards,
+                       Converter={StaticResource StringFormat}, 
+                       ConverterParameter='Awards: {0}'}"
+                       TextWrapping="WrapWholeWords"/>
+        </StackPanel>
+    </Grid>
+</ContentDialog>

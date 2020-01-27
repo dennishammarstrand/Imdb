@@ -1,0 +1,47 @@
+﻿<Page
+    x:Class="Imdb.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Imdb"
+    xmlns:fa="using:FontAwesome.UWP"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Page.Resources>
+        <SolidColorBrush x:Key="NavigationViewItemBackgroundPointerOver" Color="#FFFFCA03"/>
+        <SolidColorBrush x:Key="NavigationViewItemBackgroundSelected" Color="#FFFFCA03"/>
+        <SolidColorBrush x:Key="NavigationViewSelectionIndicatorForeground" Color="#000000"/>
+        <SolidColorBrush x:Key="NavigationViewDefaultPaneBackground" Color="#636363"/>
+        <SolidColorBrush x:Key="NavigationViewItemBackgroundSelectedPointerOver" Color="#FFFFCA03"/>
+    </Page.Resources>
+    <Grid>
+        <NavigationView x:Name="NavView" 
+                        IsBackButtonVisible="Collapsed"
+                        IsSettingsVisible="False"
+                        Loaded="InitialSelection"
+                        Header="{Binding Path=Content.Header, ElementName=MainFrame}"
+                        SelectionChanged="Nav_Selection"
+                        PaneDisplayMode="LeftCompact"
+                        ItemInvoked="Nav_Invoked">
+            <NavigationView.MenuItems>
+                <NavigationViewItem Content="Home">
+                    <NavigationViewItem.Icon>
+                        <fa:FontAwesome Icon="Imdb"/>
+                    </NavigationViewItem.Icon>
+                </NavigationViewItem>
+                <NavigationViewItem Content="Movies">
+                    <NavigationViewItem.Icon>
+                        <FontIcon Glyph="&#xE8B2;"/>
+                    </NavigationViewItem.Icon>
+                </NavigationViewItem>
+                <NavigationViewItem Content="Series">
+                    <NavigationViewItem.Icon>
+                        <fa:FontAwesome Icon="Film"/>
+                    </NavigationViewItem.Icon>
+                </NavigationViewItem>
+            </NavigationView.MenuItems>
+            <Frame x:Name="MainFrame"/>
+        </NavigationView>
+    </Grid>
+</Page>
