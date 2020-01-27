@@ -51,7 +51,7 @@
             </StackPanel.Resources>
             <TextBlock Text="{Binding Year,
                        Converter={StaticResource StringFormat}, 
-                       ConverterParameter='Year!: {0}'}"/>
+                       ConverterParameter='Year: {0}'}"/>
             <TextBlock Text="{Binding ImdbRating,
                        Converter={StaticResource StringFormat}, 
                        ConverterParameter='Rating: {0}'}"/>
